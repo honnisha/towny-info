@@ -41,6 +41,11 @@ Additional functionality for BetonQuest
 ### Events:
 - changenationpoints <points>
 
+Placeholders
+=======
+`%ti_nationismain%` - is player nation is main.
+`%ti_nationmainpoints%` - count of main nation points.
+
 Screenshots
 =======
 <div align="center"><img src="https://github.com/honnisha/towny-info/blob/main/screenshots/1.jpg?raw=true"/></div>
