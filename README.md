@@ -43,8 +43,8 @@ Additional functionality for BetonQuest
 
 Placeholders
 =======
-`%ti_nationismain%` - is player nation is main.
-`%ti_nationmainpoints%` - count of main nation points.
+- `%ti_nationismain%` - is player nation is main.
+- `%ti_nationmainpoints%` - count of main nation points.
 
 Screenshots
 =======
