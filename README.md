@@ -16,6 +16,8 @@ which will be displayed in signs from
 
 It can have any number of signs vertically.
 
+Right click on sign will teleport player to spawn point if town/nation is open and spawn is set.
+
 Leader nation
 =======
 If this option is set:
