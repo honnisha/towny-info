@@ -43,5 +43,5 @@ Additional functionality for BetonQuest
 
 Screenshots
 =======
-<div align="center"><img src="https://github.com/honnisha/towny-info/blob/master/screenshots/1.png?raw=true"/></div>
-<div align="center"><img src="https://github.com/honnisha/towny-info/blob/master/screenshots/2.png?raw=true"/></div>
+<div align="center"><img src="https://github.com/honnisha/towny-info/blob/main/screenshots/1.jpg?raw=true"/></div>
+<div align="center"><img src="https://github.com/honnisha/towny-info/blob/main/screenshots/2.jpg?raw=true"/></div>
