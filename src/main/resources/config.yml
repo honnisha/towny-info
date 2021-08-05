@@ -1,0 +1,104 @@
+debug: false
+
+messages:
+  permission-error: '&3TownyInfo: You do not have permission for this command!'
+  plugin-reloaded: '&3TownyInfo: Plugin reloaded'
+  nation-not-found-error: '&cНация "%nation%" не найдена.'
+
+  town-no-spawn-point: '&cУ города нет точки спавна!'
+  town-doesnt-open-or-not-resident: '&cГород закрыт или вы не гражданин этого города!'
+  tp-to-town: '&3Вы телепортированы в город &b%town%'
+
+  nation-no-spawn-point: '&cУ нации нет точки спавна!'
+  nation-doesnt-open-or-not-resident: '&cНация закрыта или вы не гражданин этой нации и не в союзе!'
+  tp-to-nation: '&3Вы телепортированы в нацию &b%nation%'
+
+  nation-become-main: '&3Нация &b%nation%&3 переходит в статус главной  нации.'
+  nation-stays-main: '&3Нация &b%nation%&3 остаётся в статусе главной нации.'
+  nation-lose-main: '&3Ваша нация &b%nation%&3 потеряла статус главной нации.'
+  main-nation-title: '&aГлавная'
+
+  towns-updated: '&3Статус городов обновлён'
+
+  nation-reward-money: '&3Ваша нация получила в банк &b%money%&3 за удержание статуса главной нации.'
+  nation-reward-points: '&3Ваша нация получила &b%points%&3 очков бонусов.'
+  nation-give-reward-points: '&3Администратор &b%admin%&3 выдал &b%points%&3 бонусных очков нации &b%nation%&3.'
+
+  nation-info-title: '&3=== Информация о &b%nation-name%&3 ==='
+  nation-info-1: '&3Очки нации: &b%points%&3.'
+  nation-info-2: '&3Главная нация: &b%is-main%&3.'
+  nation-info-3: '&3Банк: &b%balance%&3.'
+
+update-signs-ticks: 300
+
+open-name: '&aОткрыт'
+close-name: '&cЗакрыт'
+yes-string: '&aДа'
+no-string: '&cНет'
+
+# Options: residents
+# Keep empty to display in default order
+town-sort-method: 'residents'
+
+# Args: %name% %num-residents% %mayor% %is-pvp% %is-open% %tax% %tax-plot% %nation% %tax-plot% %prefix% %mayor% %assistant1% %assistant2% %assistant3% %is-neutral%
+town-sign-lines:
+  1:
+    1: '&b%prefix%'
+    2: '&3%name%'
+    3: '&2Жителей: &a%num-residents%'
+    4: '%is-open%'
+  2:
+    1: '&2Мэр: &a%mayor%'
+    2: '&2Налоги:'
+    3: '&2Проживание: &4%tax%'
+    4: '&2С участка: &4%tax-plot%'
+  3:
+    1: '&2Замы:'
+    2: '&e%assistant1%'
+    3: '&e%assistant2%'
+    4: '&e%assistant3%'
+  4:
+    1: '&2Нац: &a%nation%'
+    2: '&2Нейтрал: %is-neutral%'
+    3: '&2PVP: %is-pvp%'
+    4: ''
+
+town-signs:
+  # - 'world_rpg 1 -1190 69 -739'
+
+# Options: residents towns
+# Keep empty to display in default order
+nation-sort-method: 'residents'
+
+# Args: %name% %num-residents% %is-main% %num-towns% %is-open% %tax% %king% %capital% %assistant1% %assistant2% %assistant3% %enemy1% %enemy2% %enemy3% %ally1% %ally2% %ally3%
+nation-sign-lines:
+  1:
+    1: '&b%name%'
+    2: '&2Городов: &a%num-towns%'
+    3: '&2Жителей: &a%num-residents%'
+    4: '%is-open%'
+  2:
+    1: '&2Кор: &a%king%'
+    2: '&2Стол: &a%capital%'
+    3: '&2Налог: &4%tax%'
+    4: '&2Лидер: %is-main%'
+  3:
+    1: '&2Союз:'
+    2: '&9%ally1%'
+    3: '&9%ally2%'
+    4: '&9%ally3%'
+  4:
+    1: '&2Война:'
+    2: '&с%enemy1%'
+    3: '&с%enemy2%'
+    4: '&с%enemy3%'
+
+nation-signs:
+  # - 'world_rpg 1 -1209 69 -739'
+
+# Nation status update
+nation-status-update-time: '18:00'
+
+nation-rewards:
+  money: 1000
+  main-points: 5

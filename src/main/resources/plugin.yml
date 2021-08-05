@@ -1,0 +1,12 @@
+name: Townyinfo
+version: ${project.version}
+main: honnisha.townyinfo.Townyinfo
+api-version: 1.16
+authors: [ Honnisha ]
+depend: [ Towny ]
+softdepend: [ PlaceholderAPI, DiscordSRV, BetonQuest ]
+
+commands:
+  townyinfo:
+    usage: '§e/townyinfo reload'
+    aliases: [ ti ]
