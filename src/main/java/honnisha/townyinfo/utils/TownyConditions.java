@@ -8,24 +8,9 @@ import com.palmergames.bukkit.towny.object.metadata.BooleanDataField;
 import honnisha.townyinfo.Townyinfo;
 import org.bukkit.entity.Player;
 
+import java.util.Optional;
+
 public class TownyConditions {
-
-    static public boolean isNationMain(Nation nation) {
-        BooleanDataField mainStatus = (BooleanDataField) nation.getMetadata(Townyinfo.isMainNationField.getKey());
-        if (mainStatus == null || mainStatus.getValue() == null) return false;
-        return mainStatus.getValue();
-    }
-
-    static public boolean isPlayerInNationMain(Player player) {
-        Resident resident = TownyUniverse.getInstance().getResident(player.getName());
-        if (resident != null && resident.hasTown() && resident.hasNation()) {
-            try {
-                if (resident.getTown().hasNation() && TownyConditions.isNationMain(resident.getTown().getNation()))
-                    return true;
-            } catch (NotRegisteredException ignore) { }
-        }
-        return false;
-    }
 
     static public boolean isPlayerTownAdmin(Player player) {
         Resident resident = TownyUniverse.getInstance().getResident(player.getName());
@@ -36,6 +21,29 @@ public class TownyConditions {
             } catch (NotRegisteredException ignore) { }
         }
         return false;
+    }
+
+    static public Optional<Nation> getPlayerNation(Player player) {
+        Resident resident = TownyUniverse.getInstance().getResident(player.getName());
+        if (resident != null && resident.hasTown() && resident.hasNation()) {
+            try {
+                return Optional.of(resident.getTown().getNation());
+            } catch (NotRegisteredException e) {
+                return Optional.empty();
+            }
+        }
+        return Optional.empty();
+    }
+
+    static public boolean isNationMain(Nation nation) {
+        BooleanDataField mainStatus = (BooleanDataField) nation.getMetadata(Townyinfo.isMainNationField.getKey());
+        if (mainStatus == null || mainStatus.getValue() == null) return false;
+        return mainStatus.getValue();
+    }
+
+    static public boolean isPlayerInNationMain(Player player) {
+        Optional<Nation> optionalNation = getPlayerNation(player);
+        return optionalNation.isPresent() && TownyConditions.isNationMain(optionalNation.get());
     }
 
     static public boolean isPlayerNationAdmin(Player player) {

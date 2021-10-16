@@ -4,9 +4,9 @@ main: honnisha.townyinfo.Townyinfo
 api-version: 1.16
 authors: [ Honnisha ]
 depend: [ Towny ]
-softdepend: [ PlaceholderAPI, DiscordSRV, BetonQuest ]
+softdepend: [ PlaceholderAPI, DiscordSRV, BetonQuest, SiegeWar ]
 
 commands:
   townyinfo:
-    usage: '§e/townyinfo reload'
+    usage: '§e/townyinfo'
     aliases: [ ti ]

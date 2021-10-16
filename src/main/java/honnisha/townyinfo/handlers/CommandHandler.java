@@ -5,6 +5,7 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
 import honnisha.townyinfo.Townyinfo;
 import honnisha.townyinfo.tasks.NationUpdate;
+import honnisha.townyinfo.utils.DiscordSender;
 import honnisha.townyinfo.utils.TownyConditions;
 import honnisha.townyinfo.utils.TownyTools;
 import org.bukkit.command.Command;
@@ -91,6 +92,20 @@ public class CommandHandler implements CommandExecutor {
             sender.sendMessage(Objects.requireNonNull(config.getString("messages.nation-info-1")).replace("%points%", Integer.toString(TownyTools.getNationMainPoints(nation))).replace("&", "§"));
             sender.sendMessage(Objects.requireNonNull(config.getString("messages.nation-info-2")).replace("%is-main%", isMain).replace("&", "§"));
             sender.sendMessage(Objects.requireNonNull(config.getString("messages.nation-info-3")).replace("%balance%", Double.toString(nation.getAccount().getCachedBalance())).replace("&", "§"));
+
+        } else if (args[0].equalsIgnoreCase("announce")) {
+            if (sender instanceof Player && !(sender.hasPermission("townyinfo.announce") || sender.isOp())) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.permission-error")).replace("&", "§"));
+                return true;
+            }
+            DiscordSender discordSender = new DiscordSender();
+            boolean sended = discordSender.send(String.format("%s: %s", sender.getName(), args[1]));
+            if (sended) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.message-sended")).replace("%message%", args[1]).replace("&", "§"));
+            } else {
+                String channelName = Objects.requireNonNull(config.getString("notifications-discord-channel"));
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.message-not-sended")).replace("%channel%", channelName).replace("&", "§"));
+            }
         }
         return true;
     }

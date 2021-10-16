@@ -1,4 +1,4 @@
-package honnisha.townyinfo.betonquest;
+package honnisha.townyinfo.betonquest.events;
 
 import honnisha.townyinfo.Townyinfo;
 import honnisha.townyinfo.utils.TownyTools;

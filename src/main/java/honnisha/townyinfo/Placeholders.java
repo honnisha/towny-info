@@ -1,10 +1,13 @@
 package honnisha.townyinfo;
 
+import com.palmergames.bukkit.towny.object.Nation;
 import honnisha.townyinfo.utils.TownyConditions;
 import honnisha.townyinfo.utils.TownyTools;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 public class Placeholders extends PlaceholderExpansion {
 
@@ -45,12 +48,23 @@ public class Placeholders extends PlaceholderExpansion {
 
         // %ti_nationismain%
         if(identifier.equals("nationismain")) {
-            if (TownyConditions.isPlayerInNationMain(player)) return plugin.config.getString("messages.main-nation-title");
+            if (TownyConditions.isPlayerInNationMain(player)) return plugin.getMainConfig().getMessagesMainNationTitle();
             return "";
         }
+
         // %ti_nationmainpoints%
-        if(identifier.equals("nationmainpoints")) {
+        else if(identifier.equals("nationmainpoints")) {
             return Integer.toString(TownyTools.getNationMainPoints(player));
+        }
+
+        // %ti_ismainking%
+        else if(identifier.equals("ismainking")) {
+            if (TownyConditions.isPlayerInNationMain(player)) {
+                Optional<Nation> optionalNation = TownyConditions.getPlayerNation(player);
+                if (optionalNation.isPresent() && optionalNation.get().getKing().getName().equals(player.getName()))
+                    return plugin.getMainConfig().getMainKingPlaceholder();
+            }
+            return "";
         }
 
         return null;
