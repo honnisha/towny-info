@@ -1,6 +1,8 @@
 package honnisha.townyinfo.events;
 
 import com.palmergames.bukkit.towny.event.*;
+import com.palmergames.bukkit.towny.event.town.TownKickEvent;
+import com.palmergames.bukkit.towny.event.town.TownLeaveEvent;
 import com.palmergames.bukkit.towny.event.town.TownReclaimedEvent;
 import com.palmergames.bukkit.towny.event.town.TownRuinedEvent;
 import com.palmergames.bukkit.towny.event.town.toggle.TownToggleOpenEvent;
@@ -67,6 +69,38 @@ public class TownyEvents implements Listener {
     public void TownDeleted(DeleteTownEvent event) {
         Player player = Bukkit.getPlayer(event.getMayorUUID());
         this.SendDefaultTownMessage("messages.town-deleted", event.getTownName(), player != null ? player.getName() : "");
+    }
+
+    @EventHandler
+    public void TownKick(TownKickEvent event) {
+        FileConfiguration config = Townyinfo.getInstance().getConfig();
+
+        String message = Objects.requireNonNull(config.getString("messages.town-kicked")).replace(
+                "%town%", event.getTown().getName()
+        ).replace(
+                "%kicker%", ((Player) event.getKicker()).getDisplayName()
+        ).replace(
+                "%kicked%", event.getKickedResident().getName()
+        ).replace(
+                "%message%", event.getCancelMessage()
+        );
+        DiscordSender discordSender = new DiscordSender();
+        discordSender.send(message);
+    }
+
+    @EventHandler
+    public void TownPlayerLeave(TownLeaveEvent event) {
+        FileConfiguration config = Townyinfo.getInstance().getConfig();
+
+        String message = Objects.requireNonNull(config.getString("messages.town-player-leave")).replace(
+                "%town%", event.getTown().getName()
+        ).replace(
+                "%leaver%", event.getResident().getName()
+        ).replace(
+                "%message%", event.getCancelMessage()
+        );
+        DiscordSender discordSender = new DiscordSender();
+        discordSender.send(message);
     }
 
     @EventHandler

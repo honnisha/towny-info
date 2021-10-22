@@ -49,8 +49,11 @@ public class MainConfigManager {
         townSignLines = Objects.requireNonNull(config.getConfigurationSection("town-sign-lines")).getKeys(false);
         for (String sectionName : this.townSignLines) {
             for (int i = 0; i <= 3; i++) {
-                String key = String.format("town-sign-lines.%s.%s", sectionName, i + 1);
-                townSignLinesMap.put(key, Objects.requireNonNull(config.getString(key)));
+                String key = "town-sign-lines." + sectionName + "." + (i + 1);
+                String value = Objects.requireNonNull(config.getString(key));
+                townSignLinesMap.put(key, value);
+                if (debug)
+                    Townyinfo.logger.info("DEBUG Towny Info: town-sign-lines set " + key + ": " + value);
             }
         }
 
@@ -59,7 +62,10 @@ public class MainConfigManager {
         for (String sectionName : this.nationSignLines) {
             for (int i = 0; i <= 3; i++) {
                 String key = "nation-sign-lines." + sectionName + "." + (i + 1);
-                nationSignLinesMap.put(key, Objects.requireNonNull(config.getString(key)));
+                String value = Objects.requireNonNull(config.getString(key));
+                nationSignLinesMap.put(key, value);
+                if (debug)
+                    Townyinfo.logger.info("DEBUG Towny Info: nation-sign-lines set " + key + ": " + value);
             }
         }
     }
@@ -69,9 +75,10 @@ public class MainConfigManager {
     }
 
     public String getTownSignLine(String sectionName, int i) {
-        String key = "town-sign-lines."+ sectionName + "." + (i + 1);
+        String key = "town-sign-lines." + sectionName + "." + (i + 1);
         if (!townSignLinesMap.containsKey(key)) {
-            Townyinfo.logger.info("DEBUG MainConfigManager: townSignLinesMap is not contains: "+ key);
+            if (this.debug)
+                Townyinfo.logger.info("DEBUG MainConfigManager: townSignLinesMap is not contains: " + key + " all keys: " + townSignLinesMap.size());
             return null;
         }
         return townSignLinesMap.get(key);
@@ -80,7 +87,8 @@ public class MainConfigManager {
     public String getNationSignLine(String sectionName, int i) {
         String key = "nation-sign-lines." + sectionName + "." + (i + 1);
         if (!nationSignLinesMap.containsKey(key)) {
-            Townyinfo.logger.info("DEBUG MainConfigManager: nationSignLinesMap is not contains: "+ key);
+            if (this.debug)
+                Townyinfo.logger.info("DEBUG MainConfigManager: nationSignLinesMap is not contains: " + key + " all keys: " + nationSignLinesMap.size());
             return null;
         }
         return nationSignLinesMap.get(key);
