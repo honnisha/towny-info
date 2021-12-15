@@ -30,7 +30,6 @@ public final class Townyinfo extends JavaPlugin {
 
     private static Townyinfo instance;
     @Getter private MainConfigManager mainConfig;
-    public static Logger logger;
 
     private ArrayList<Task> tasks = new ArrayList<>();
 
@@ -40,7 +39,6 @@ public final class Townyinfo extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        logger = Bukkit.getLogger();
         this.loadConfig();
 
         Objects.requireNonNull(this.getCommand("townyinfo")).setExecutor(new CommandHandler());
@@ -52,15 +50,21 @@ public final class Townyinfo extends JavaPlugin {
 
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new Placeholders(this).register();
-            logger.info("PlaceholderAPI plugin hooked");
+            getLogger().info("PlaceholderAPI plugin hooked");
+        }
+        else {
+            getLogger().info("PlaceholderAPI not found");
         }
 
         if(Bukkit.getPluginManager().getPlugin("SiegeWar") != null) {
             getServer().getPluginManager().registerEvents(new SiegeWarEvents(), this);
-            logger.info("SiegeWar plugin hooked");
+            getLogger().info("SiegeWar plugin hooked");
+        }
+        else {
+            getLogger().info("SiegeWar not found");
         }
 
-        if(Bukkit.getPluginManager().getPlugin("BetonQuest") != null) {
+        if(Bukkit.getPluginManager().getPlugin("BetonQuest") != null && BetonQuest.getInstance() != null) {
             BetonQuest.getInstance().registerConditions("isnationmain", IsMainNation.class);
             BetonQuest.getInstance().registerConditions("isnationadmin", IsNationAdmin.class);
             BetonQuest.getInstance().registerConditions("istownadmin", IsTownAdmin.class);
@@ -68,7 +72,10 @@ public final class Townyinfo extends JavaPlugin {
             BetonQuest.getInstance().registerConditions("isinnation", IsInNation.class);
 
             BetonQuest.getInstance().registerEvents("changenationpoints", EventChangeNationMainPoints.class);
-            logger.info("BetonQuest plugin hooked");
+            getLogger().info("BetonQuest plugin hooked");
+        }
+        else {
+            getLogger().info("BetonQuest not found");
         }
 
         try {
@@ -80,7 +87,7 @@ public final class Townyinfo extends JavaPlugin {
 
         this.loadTasks();
         this.RunTasksUpdater();
-        logger.info("Townyinfo plugin loaded");
+        getLogger().info("plugin loaded");
     }
 
     public void startSignsUpdater() {
@@ -96,7 +103,7 @@ public final class Townyinfo extends JavaPlugin {
                 }
             }
         }, 0L, this.mainConfig.getUpdateSignsTicks());
-        logger.info("Townyinfo sign updater started");
+        getLogger().info("Townyinfo sign updater started");
     }
 
     public void loadTasks() {
@@ -126,6 +133,6 @@ public final class Townyinfo extends JavaPlugin {
     public void loadConfig() {
         this.saveDefaultConfig();
         mainConfig = new MainConfigManager(this.getConfig());
-        logger.info("Townyinfo config loaded");
+        getLogger().info("Townyinfo config loaded");
     }
 }

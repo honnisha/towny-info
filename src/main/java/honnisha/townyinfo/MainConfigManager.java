@@ -53,7 +53,7 @@ public class MainConfigManager {
                 String value = Objects.requireNonNull(config.getString(key));
                 townSignLinesMap.put(key, value);
                 if (debug)
-                    Townyinfo.logger.info("DEBUG Towny Info: town-sign-lines set " + key + ": " + value);
+                    Townyinfo.getInstance().getLogger().info("DEBUG Towny Info: town-sign-lines set " + key + ": " + value);
             }
         }
 
@@ -65,7 +65,7 @@ public class MainConfigManager {
                 String value = Objects.requireNonNull(config.getString(key));
                 nationSignLinesMap.put(key, value);
                 if (debug)
-                    Townyinfo.logger.info("DEBUG Towny Info: nation-sign-lines set " + key + ": " + value);
+                    Townyinfo.getInstance().getLogger().info("DEBUG Towny Info: nation-sign-lines set " + key + ": " + value);
             }
         }
     }
@@ -78,7 +78,7 @@ public class MainConfigManager {
         String key = "town-sign-lines." + sectionName + "." + (i + 1);
         if (!townSignLinesMap.containsKey(key)) {
             if (this.debug)
-                Townyinfo.logger.info("DEBUG MainConfigManager: townSignLinesMap is not contains: " + key + " all keys: " + townSignLinesMap.size());
+                Townyinfo.getInstance().getLogger().info("DEBUG MainConfigManager: townSignLinesMap is not contains: " + key + " all keys: " + townSignLinesMap.size());
             return null;
         }
         return townSignLinesMap.get(key);
@@ -88,7 +88,7 @@ public class MainConfigManager {
         String key = "nation-sign-lines." + sectionName + "." + (i + 1);
         if (!nationSignLinesMap.containsKey(key)) {
             if (this.debug)
-                Townyinfo.logger.info("DEBUG MainConfigManager: nationSignLinesMap is not contains: " + key + " all keys: " + nationSignLinesMap.size());
+                Townyinfo.getInstance().getLogger().info("DEBUG MainConfigManager: nationSignLinesMap is not contains: " + key + " all keys: " + nationSignLinesMap.size());
             return null;
         }
         return nationSignLinesMap.get(key);

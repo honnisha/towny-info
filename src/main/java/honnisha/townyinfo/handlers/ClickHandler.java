@@ -27,7 +27,7 @@ public class ClickHandler implements Listener {
         MainConfigManager mainConfig = Townyinfo.getInstance().getMainConfig();
 
         if (mainConfig.isDebug())
-            Townyinfo.logger.info(String.format("DEBUG onBlockClick: User %s clicked on block:%s action:%s", event.getPlayer().getName(), event.getClickedBlock(), event.getAction()));
+            Townyinfo.getInstance().getLogger().info(String.format("DEBUG onBlockClick: User %s clicked on block:%s action:%s", event.getPlayer().getName(), event.getClickedBlock(), event.getAction()));
 
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             Block block = event.getClickedBlock();
@@ -56,7 +56,7 @@ public class ClickHandler implements Listener {
         }
         if (!index.isPresent()) {
             if (mainConfig.isDebug())
-                Townyinfo.logger.info(String.format("DEBUG onBlockClick: town sign not found in x:%s z:%s", block.getX(), block.getZ()));
+                Townyinfo.getInstance().getLogger().info(String.format("DEBUG onBlockClick: town sign not found in x:%s z:%s", block.getX(), block.getZ()));
             return;
         }
         List<Town> towns = TownyAPI.getInstance().getDataSource().getTowns();
@@ -65,7 +65,7 @@ public class ClickHandler implements Listener {
 
         if (!town.isPresent()) {
             if (mainConfig.isDebug())
-                Townyinfo.logger.info(String.format("DEBUG onBlockClick: town not found with index %s", index.get()));
+                Townyinfo.getInstance().getLogger().info(String.format("DEBUG onBlockClick: town not found with index %s", index.get()));
             return;
         }
         Resident resident = TownyUniverse.getInstance().getResident(player.getName());
@@ -92,7 +92,7 @@ public class ClickHandler implements Listener {
         }
         if (!index.isPresent()) {
             if (mainConfig.isDebug())
-                Townyinfo.logger.info(String.format("DEBUG onBlockClick: nation sign not found in x:%s z:%s", block.getX(), block.getZ()));
+                Townyinfo.getInstance().getLogger().info(String.format("DEBUG onBlockClick: nation sign not found in x:%s z:%s", block.getX(), block.getZ()));
             return;
         }
         List<Nation> nations = TownyAPI.getInstance().getDataSource().getNations();
@@ -101,7 +101,7 @@ public class ClickHandler implements Listener {
 
         if (!optionalNation.isPresent()) {
             if (mainConfig.isDebug())
-                Townyinfo.logger.info(String.format("DEBUG onBlockClick: town not found with index %s", index.get()));
+                Townyinfo.getInstance().getLogger().info(String.format("DEBUG onBlockClick: town not found with index %s", index.get()));
             return;
         }
         Resident resident = TownyUniverse.getInstance().getResident(player.getName());

@@ -25,7 +25,7 @@ public class Task {
 
         final DayOfWeek currentDayOfWeek = LocalDateTime.now().getDayOfWeek();
         String currentDayOfWeekName = currentDayOfWeek.getDisplayName(TextStyle.FULL, Locale.US);
-        Townyinfo.logger.info(String.format(
+        Townyinfo.getInstance().getLogger().info(String.format(
                 "Task registered for execute at %s day: %s (now:%s day:%s)",
                 this.timeToExecute, this.dayOfWeek, Task.dateFormat.format(new Date()), currentDayOfWeekName
         ));

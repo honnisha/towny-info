@@ -36,7 +36,7 @@ public class TownSignsUpdater {
         sortTowns(towns);
 
         if (mainConfig.isDebug())
-            Townyinfo.logger.info(String.format("DEBUG UpdateTownSigns: started (towns count: %s)", towns.size()));
+            Townyinfo.getInstance().getLogger().info(String.format("DEBUG UpdateTownSigns: started (towns count: %s)", towns.size()));
 
         for (String signInfo : mainConfig.getTownSigns()) {
             String[] signArgs = signInfo.split(" ");
@@ -48,14 +48,14 @@ public class TownSignsUpdater {
             World world = Bukkit.getServer().getWorld(worldName);
 
             if (world == null) {
-                Townyinfo.logger.warning(String.format("World \"%s\" not exists", worldName));
+                Townyinfo.getInstance().getLogger().warning(String.format("World \"%s\" not exists", worldName));
                 continue;
             }
 
             Optional<Town> optionalTown = getTown(number - 1, towns);
             if (!optionalTown.isPresent()) {
                 if (mainConfig.isDebug())
-                    Townyinfo.logger.info(String.format("DEBUG UpdateTownSigns: Town with number %s not fund", number));
+                    Townyinfo.getInstance().getLogger().info(String.format("DEBUG UpdateTownSigns: Town with number %s not fund", number));
 
                 // Clear signs
                 int sectionClearCount = 0;
@@ -93,7 +93,7 @@ public class TownSignsUpdater {
                 Block locatedBlock = world.getBlockAt(signX, signY - sectionCount, signZ);
                 if (!(locatedBlock.getState() instanceof Sign)) {
                     if (mainConfig.isDebug())
-                        Townyinfo.logger.info(String.format("DEBUG UpdateTownSigns: Block in %s %s %s is not a sign", signX, signY - sectionCount, signZ));
+                        Townyinfo.getInstance().getLogger().info(String.format("DEBUG UpdateTownSigns: Block in %s %s %s is not a sign", signX, signY - sectionCount, signZ));
                 } else {
                     Sign sign = (Sign) locatedBlock.getState();
 
@@ -137,7 +137,7 @@ public class TownSignsUpdater {
                 sectionCount += 1;
             }
             if (mainConfig.isDebug())
-                Townyinfo.logger.info(String.format("DEBUG UpdateTownSigns: Town sign \"%s\" updated for town %s", signInfo, town.getName()));
+                Townyinfo.getInstance().getLogger().info(String.format("DEBUG UpdateTownSigns: Town sign \"%s\" updated for town %s", signInfo, town.getName()));
         }
     }
 }

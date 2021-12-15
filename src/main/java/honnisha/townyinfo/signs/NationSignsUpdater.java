@@ -44,7 +44,7 @@ public class NationSignsUpdater {
         sortNations(nations);
 
         if (mainConfig.isDebug())
-            Townyinfo.logger.info(String.format("DEBUG UpdateNationSigns: started (nations count: %s)", nations.size()));
+            Townyinfo.getInstance().getLogger().info(String.format("DEBUG UpdateNationSigns: started (nations count: %s)", nations.size()));
 
         for (String signInfo : mainConfig.getNationSigns()) {
             String[] signArgs = signInfo.split(" ");
@@ -56,14 +56,14 @@ public class NationSignsUpdater {
             World world = Bukkit.getServer().getWorld(worldName);
 
             if (world == null) {
-                Townyinfo.logger.warning(String.format("World \"%s\" not exists", worldName));
+                Townyinfo.getInstance().getLogger().warning(String.format("World \"%s\" not exists", worldName));
                 continue;
             }
 
             Optional<Nation> optionalNation = getNation(number - 1, nations);
             if (!optionalNation.isPresent()) {
                 if (mainConfig.isDebug())
-                    Townyinfo.logger.info(String.format("DEBUG UpdateNationSigns: Town with number %s not fund", number));
+                    Townyinfo.getInstance().getLogger().info(String.format("DEBUG UpdateNationSigns: Town with number %s not fund", number));
 
                 // Clear signs
                 int sectionClearCount = 0;
@@ -107,7 +107,7 @@ public class NationSignsUpdater {
                 Block locatedBlock = world.getBlockAt(signX, signY - sectionCount, signZ);
                 if (!(locatedBlock.getState() instanceof Sign)) {
                     if (mainConfig.isDebug())
-                        Townyinfo.logger.info(String.format("DEBUG UpdateNationSigns: Nation in %s %s %s is not a sign", signX, signY - sectionCount, signZ));
+                        Townyinfo.getInstance().getLogger().info(String.format("DEBUG UpdateNationSigns: Nation in %s %s %s is not a sign", signX, signY - sectionCount, signZ));
                 } else {
                     Sign sign = (Sign) locatedBlock.getState();
 
@@ -157,7 +157,7 @@ public class NationSignsUpdater {
                 sectionCount += 1;
             }
             if (mainConfig.isDebug())
-                Townyinfo.logger.info(String.format("DEBUG UpdateNationSigns: Nation sign \"%s\" updated for nation %s", signInfo, nation.getName()));
+                Townyinfo.getInstance().getLogger().info(String.format("DEBUG UpdateNationSigns: Nation sign \"%s\" updated for nation %s", signInfo, nation.getName()));
         }
     }
 }
